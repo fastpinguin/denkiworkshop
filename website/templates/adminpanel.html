@@ -34,7 +34,6 @@
             $('#result').text(data.result);
             temp = data.result;
         });
-        //c+=1;
         if (temp == undefined){
             return;
         }
@@ -45,12 +44,6 @@
             var i = myChart.data.labels.indexOf(key);
             myChart.data.datasets[0].data[i] = value;
         }
-        /*
-        temp.forEach((key, value) => Console.log(key, value))
-        myChart.data.labels.push(c);
-        myChart.data.datasets.forEach((dataset) => {
-            dataset.data.push(temp);
-        });*/
         myChart.update();
     };
 
