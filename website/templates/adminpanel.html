@@ -9,29 +9,13 @@
 <script type="text/javascript">
     var intervalID = setInterval(update_values, 1000);
     var temp;
-    function update_values(){
-            $.getJSON("/api?results",
-        function(data) {
-            $('#result').text(data.result);
-            temp = data.result;
-        });
-        // remove items not present in input
-        myChart.data.labels.filter(label => temp.includes(label));
-        // add items not present in output
-        myChart.data.labels.filter.concat(temp.filter(item => !myChart.data.labels.includes(item)));
-        myChart.data.labels.push(c);
-        myChart.data.datasets.forEach((dataset) => {
-            dataset.data.push(temp);
-        });
-        myChart.update();
-    };
     var ctx = document.getElementById("resultsChart");
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
-            labels: [c],
+            labels: [],
             datasets: [{
-                label: "Results",
+                label: "This is a test",
                 data: [temp],
                 borderWidth: 1
             }],
@@ -44,5 +28,31 @@
             }
         }
     });
+    function update_values(){
+            $.getJSON("/api?results",
+        function(data) {
+            $('#result').text(data.result);
+            temp = data.result;
+        });
+        //c+=1;
+        if (temp == undefined){
+            return;
+        }
+        for (let [key, value] of Object.entries(temp)) {
+            if (!myChart.data.labels.includes(key)){
+                myChart.data.labels.push(key)
+            }
+            var i = myChart.data.labels.indexOf(key);
+            myChart.data.datasets[0].data[i] = value;
+        }
+        /*
+        temp.forEach((key, value) => Console.log(key, value))
+        myChart.data.labels.push(c);
+        myChart.data.datasets.forEach((dataset) => {
+            dataset.data.push(temp);
+        });*/
+        myChart.update();
+    };
+
 </script>
 {% endblock %}
