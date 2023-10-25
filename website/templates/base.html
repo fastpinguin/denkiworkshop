@@ -1,0 +1,12 @@
+<!doctype html>
+<head>
+<title>Design Thinking</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body><div id="nav">
+<ul>
+    <li style="float: right; border: none;"><a href="{{url_for('auth.login')}}">Login</a></li>
+</ul>
+</div>
+{% block content %}{%endblock%}
+</body>

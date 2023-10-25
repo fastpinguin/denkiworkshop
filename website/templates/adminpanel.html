@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+<h1>Chart Test</h1>
+<canvas id="resultsChart" width="400px" height="200px"></canvas>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+    var intervalID = setInterval(update_values, 1000);
+    var temp;
+    function update_values(){
+            $.getJSON("/api?results",
+        function(data) {
+            $('#result').text(data.result);
+            temp = data.result;
+        });
+        // remove items not present in input
+        myChart.data.labels.filter(label => temp.includes(label));
+        // add items not present in output
+        myChart.data.labels.filter.concat(temp.filter(item => !myChart.data.labels.includes(item)));
+        myChart.data.labels.push(c);
+        myChart.data.datasets.forEach((dataset) => {
+            dataset.data.push(temp);
+        });
+        myChart.update();
+    };
+    var ctx = document.getElementById("resultsChart");
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: [c],
+            datasets: [{
+                label: "Results",
+                data: [temp],
+                borderWidth: 1
+            }],
+            options: {
+                plugins: {
+                    colorschemes: {
+                        scheme: 'brewer.Paired12'  // Use the default color scheme
+                    },
+                },
+            }
+        }
+    });
+</script>
+{% endblock %}
