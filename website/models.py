@@ -9,3 +9,8 @@ class User(UserMixin, db.Model):
 
     def __str__(self) -> str:
         return self.username
+
+
+class Player(db.Model):
+    playerid = db.Column(db.String(100), unique=True, primary_key=True)
+    points = db.Column(db.Integer)

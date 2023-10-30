@@ -4,7 +4,7 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body><div id="nav">
+<body><div id="nav"><div style="vertical-align: middle;margin-right:1em;text-align: right;">Hello, {{player}}!</div>
 </div>
 {% block content %}{%endblock%}
 </body>
