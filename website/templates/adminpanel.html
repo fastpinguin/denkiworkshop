@@ -25,7 +25,12 @@
                         scheme: 'brewer.Paired12'  // Use the default color scheme
                     },
                 },
-            }
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }    
         }
     });
     function update_values(){
