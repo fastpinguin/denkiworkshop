@@ -4,7 +4,7 @@ from flask_login import LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
 
 
-
+db = SQLAlchemy()
 #frontend = website.create_app()
 #waitressserve(frontend, host="0.0.0.0", port=80)
 app = Flask(__name__)
