@@ -20,7 +20,7 @@ def root():
         # generate new name if the user does not have one
         new_name = Dhampir.generate()
         resp = make_response(redirect(url_for("content.root")))
-        resp.set_cookie("player", new_name)
+        resp.set_cookie("player", new_name, httponly=True)
         return resp
 
 
