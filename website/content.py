@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, send_file, redirect, url_for, jsonify, make_response
+from flask import Blueprint, render_template, request, flash, send_file, redirect, url_for, jsonify, make_response, Response
 from flask_login import login_required, current_user, logout_user
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -46,10 +46,25 @@ def test():
 def increase_points():
     name = request.cookies.get('player')
     player = Player.query.filter_by(playerid=name).first() # if this returns a user, then it already exists.
+    if player is None:
+        # delete cookie and redirect to rickroll
+        resp = make_response(redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+        # Set the cookie value to an empty string
+        resp.set_cookie('player', '', max_age=0)
+        return resp
     player.points += 1
     db.session.commit()
     return redirect(url_for("content.root"))
 
+
+
+@content.route("/del", methods=["POST"])
+@login_required
+def admin_api():
+    Player.query.delete()
+    db.session.commit()
+    return redirect(url_for("content.adminpanel"))
+    
 
 @content.route("/admin")
 @login_required

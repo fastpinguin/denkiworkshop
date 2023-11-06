@@ -5,6 +5,9 @@
 <h1>Chart Test</h1>
 <canvas id="resultsChart" width="400px" height="200px"></canvas>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<form method="POST" action="/del">
+    <button id="submit">Clear Players</button>
+</form>
 
 <script type="text/javascript">
     var intervalID = setInterval(update_values, 1000);
