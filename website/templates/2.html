@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>SECOND</h1>
+<form id="myForm" action="{{'/?current=' + current}}" method="post">
+    <!-- Add a hidden field to store the time -->
+    <input type="hidden" id="time" name="time" value="1">
+    <button type="submit">Submit</button>
+</form>
+<form action="{{'/?goback=' + current}}" method="post">
+    <input type="hidden" id="time" name="time" value="1">
+    <button name="foo" value="upvote">Continue</button>
+</form>
+
+<script>
+    const form = document.getElementById('myForm');
+    const startTime = Date.now();
+
+    form.addEventListener('submit', function(event) {
+        // Calculate the time taken to fill out the form
+        const endTime = Date.now();
+        const timeTaken = endTime - startTime;
+
+        // Set the time in the hidden input field
+        document.getElementById('time').value = timeTaken;
+    });
+</script>
+{% endblock %}

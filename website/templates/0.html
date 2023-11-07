@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+Zero
+{% block content %}
+<h1>Hello! Lets start!</h1>
+<form action="{{'/?current=' + current}}" method="post">
+    <input type="hidden" id="time" name="time" value="1">
+    <button name="foo" value="upvote">Continue</button>
+</form>
+{% endblock %}

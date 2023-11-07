@@ -6,5 +6,20 @@
 </head>
 <body><div id="nav"><div style="vertical-align: middle;margin-right:1em;text-align: right;">Hello, {{player}}!</div>
 </div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div style="float: right; position: relative; top:20px; width:200px; right: 20px; z-index:10;">
+{% for category, message in messages %}
+{% if category == 'info' %}
+<div class="notification">
+{{ message }}</div>{% else %}
+<div class="error">
+{{ message }}.
+</div>
+{% endif %}
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 {% block content %}{%endblock%}
 </body>

@@ -13,4 +13,4 @@ class User(UserMixin, db.Model):
 
 class Player(db.Model):
     playerid = db.Column(db.String(100), unique=True, primary_key=True)
-    points = db.Column(db.Integer)
+    points = db.Column(db.Text)
