@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>SECOND</h1>
+<form id="myForm" action="{{'/?current=' + current}}" method="post">
+    <!-- Add a hidden field to store the time -->
+    <input type="hidden" id="time" name="time" value="100000000">
+<button type="submit">Start Game</button>
+</form>
+{% endblock %}

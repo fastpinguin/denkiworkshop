@@ -1,16 +1,162 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>SECOND</h1>
-<form id="myForm" action="{{'/?current=' + current}}" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ugly Page Two</title>
+    <style>
+        body {
+            background: #ffffcc;
+            color: #006600;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background: #ccffcc;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background: #b3ffb3;
+            padding: 10px;
+            text-align: center;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background: #ffcc99;
+            border: 2px solid #ff9900;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ffcc99;
+            margin-bottom: 10px;
+        }
+        .button-container {
+            
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+        button {
+            background: #ff6666;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            width: 120px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ugly Page Two</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section style="background-image: url('https://placeimg.com/1200/600/nature'); background-size: cover; background-position: center;">
+        <h2>Welcome to Another Ugly Page!</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis non ligula fringilla laoreet id quis mi.</p>
+        <img src="https://placekitten.com/800/300" alt="Another terrible image">
+        <!-- Repeat the above lorem ipsum and image elements to make it more horrible -->
+</section>
+<section id="home">
+    <h2>Welcome to Our Cute Pets Website!</h2>
+    <p>Discover the enchanting world of pets! Whether it's the playful antics of kittens or the loyal companionship of dogs, our website celebrates the joy and warmth that pets bring into our lives.</p>
+    <img src="https://placekitten.com/800/600" alt="Cute pet image">
+</section>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>We are dedicated pet enthusiasts committed to sharing our love and knowledge about animals. Our mission is to provide valuable insights into pet care, health, and happiness.</p>
+    <p>With years of experience, we aim to guide pet owners in nurturing strong and loving bonds with their furry, feathered, or scaled companions.</p>
+    <img src="https://placepuppy.net/800x600" alt="Another cute pet image">
+</section>
+
+<section id="pets">
+    <h2>Our Pets</h2>
+    <p>Meet our adorable furry friends! From mischievous kittens to energetic puppies, our gallery showcases a variety of pets in all their charming glory.</p>
+    <div class="pet-gallery">
+        <img src="https://placekitten.com/500/400" alt="Kitten">
+        <img src="https://placepuppy.net/500x400" alt="Puppy">
+        <!-- Add more pet images here -->
+    </div>
+</section>
+
+<section id="facts">
+    <h2>Random Pet Facts</h2>
+    <p>Did you know that cats have five toes on their front paws but only four on their back paws?</p>
+    <p>Another interesting fact: Dogs have an extraordinary sense of smell, with some breeds having up to 300 million scent receptors!</p>
+</section>
+
+<section id="more-facts">
+    <h2>Fun Facts Continued</h2>
+    <p>Hamsters are excellent escape artists and can run up to 8 miles a night on their exercise wheels!</p>
+    <p>Additionally, parrots are highly intelligent birds known for their ability to mimic human speech and sounds from their environment.</p>
+</section>
+<section>
+        <!-- Lots of buttons on the right side -->
+        <div class="button-container">
+            <form action="https://jolofilms.eu" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Terminate Subscription</button>
+  </form>
+
+  <form action="https://google.at" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Withdraw Newsletter</button>
+  </form>
+
+  <form action="https://skribbl.io" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Revoke Bulletin</button>
+  </form>
+
+  <form id="myForm" action="{{'/?current=' + current}}" method="post">
     <!-- Add a hidden field to store the time -->
     <input type="hidden" id="time" name="time" value="1">
-    <button type="submit">Submit</button>
-</form>
-<form action="{{'/?goback=' + current}}" method="post">
-    <input type="hidden" id="time" name="time" value="1">
-    <button name="foo" value="upvote">Continue</button>
-</form>
+<button class="button-like-link" type="submit">Abrogate Periodical</button>
+  </form>
 
+  <!-- Add forms for other buttons -->
+
+  <form action="https://wikipedia.de" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Annul Dispatch</button>
+  </form>
+
+  <form action="https://tuwel.tuwien.ac.at" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Repeal Mailshot</button>
+  </form>
+
+<form action="https://tiss.tuwien.ac.at" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Cancel Circularization</button>
+  </form>
+
+<form action="https://agar.io" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Scratch Newsletter</button>
+  </form>
+
+<form action="https://slither.io" method="get" target="_blank">
+    <button class="button-like-link" type="submit">Eliminate Bulletin</button>
+  </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Ugly Page Two. All rights reserved.</p>
+    </footer>
 <script>
     const form = document.getElementById('myForm');
     const startTime = Date.now();
@@ -24,4 +170,5 @@
         document.getElementById('time').value = timeTaken;
     });
 </script>
-{% endblock %}
+</body>
+</html>

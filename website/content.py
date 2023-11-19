@@ -49,7 +49,7 @@ def root():
             return redirect(url_for("content.generate_name") + "?redirect=content.root")
         # The player has a valid username that is in the database.
         if request.method == "GET":
-            return render_template("0.html", player=name, current=CONTEXT[PAGELIST[0]][0])
+            return render_template("start.html", player=name, current=CONTEXT[PAGELIST[0]][0])
 
 
         elif request.method == "POST":
@@ -63,12 +63,13 @@ def root():
                     # valid code, check if the user already has this current
                     current = args["current"]
                     points = json.loads(player.points)
+                    print(request.form)
                     if current in points.keys():
                         # serve next form field
                         return render_template(get_html_file_for_key(CONTEXT[current][1]), player=name, current=CONTEXT[current][1])
                     else:
                         # the player has unlocked a new thing:
-                        points[current] = (1/(int(request.form["time"])))*10000
+                        points[current] = (1/(int(request.form["time"])))*10000000
                         player.points = json.dumps(points)
                         db.session.commit()
                         return render_template(get_html_file_for_key(CONTEXT[current][1]), player=name, current=CONTEXT[current][1])

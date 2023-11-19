@@ -1,16 +1,343 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>FIRST</h1>
-<form id="myForm" action="{{'/?current=' + current}}" method="post">
-    <!-- Add a hidden field to store the time -->
-    <input type="hidden" id="time" name="time" value="1">
-    <button type="submit">Submit</button>
-</form>
-<form action="{{'/?goback=' + current}}" method="post">
-    <input type="hidden" id="time" name="time" value="1">
-    <button name="foo" value="upvote">Continue</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var links = document.querySelectorAll('a');
+      links.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent the default link behavior
+          window.open(link.href, '_blank'); // Open the link in a new tab
+        });
+      });
+    });
+  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denki</title>
+    <style>
+        .button-like-link {
+      background: none;
+      border: none;
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+        body {
+            background: #ffc0cb;
+            color: #000;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background: #87cefa;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background: #add8e6;
+            padding: 10px;
+            text-align: center;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #87ceeb;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #87cefa;
+            margin-bottom: 10px;
+        }
+        /* Dark pattern styles */
+        .popup {
+            display: none;
+            position: fixed;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-image: url({{url_for('static', filename='rauschen.jpg')}});
+            border: 2px solid #87ceeb;
+            z-index: 9999;
+        }
+        .closing{
+            width: 10px;
+            height: 10px;
+            border: none;
+        }
+        .closing.right{
+            padding-left: 200px;
+        }
+        .newsletter-form, .no-newsletter {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            padding: 3px;
+            width: 300px;
+            height: 300px;
+            background-image: url({{url_for('static', filename='blaetter.jpg')}});
+            border: 5px dashed green;
+            z-index: 9998;
+        }
+        #newsletterForm2{
+            top: 10%;
+            left: 10%;
+            height: 200px;
+            background-color: red;
+            background-image: none;
+            font-size: 30px;
+        }
+        .newsletter-confirmation{
+            display: none;
+            position: fixed;
+            color: white;
+            font-weight: bold;
+            font-size: 50px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-image: url({{url_for('static', filename='blaetter.jpg')}});
+            border: 2px solid #87ceeb;
+            z-index: 9999;
+        }
+        ul.submenu {
+            display: none;
+            left: 50%;
+            position: absolute;
+            background: #555;
+            padding: 10px;
+            list-style: none;
+            z-index: 1;
+        }
+        li:hover ul.submenu{
+            display: block;
+        }
+        .submenu li:hover ul.submenu1{
+            display: block;
+        }
+        .submenu1 li:hover ul.submenu2{
+            display: block;
+        }
+        ul.submenu li {
+            display: block;
+            margin: 50px 0;
+        }
+        ul.submenu1 li {
+            display: block;
+            margin: 0 0;
+        }
+        ul.submenu2 li {
+            display: block;
+            margin: 0 0;
+        }
+        .submenu1{
+            display: none;
+            left: 65%;
+            position: absolute;
+            background: #555;
+            padding: 0;
+            list-style: none;
+            z-index: 1;
+
+        }
+        .submenu2{
+            display: none;
+            left: 80%;
+            position: absolute;
+            background: #555;
+            padding: 0;
+            list-style: none;
+            z-index: 1;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shop</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?time_continue=6&v=zpMp2tpH64Y&embeds_referring_euri=https%3A%2F%2Fwww.jolofilms.eu%2F&feature=emb_title">Home</a></li>
+            <li><a href="https://www.youtube.com/watch?v=F-X4SLhorvw">About Us</a></li>
+            <li><a href="https://www.youtube.com/watch?v=nwP3TeK-fPs">Shop</a>
+                
+            </li>
+            <li><a href="https://www.youtube.com/watch?v=SzlSoeZJSUM">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section style="background-image: url('https://placeimg.com/1200/600/nature'); background-size: cover; background-position: center;">
+        <h2>Welcome to the Worst Website Ever!</h2>
+        <p>Sportsman delighted improving dashwoods gay instantly happiness six. Ham now amounted absolute not mistaken way pleasant whatever. At an these still no dried folly stood thing. Rapid it on hours hills it seven years. If polite he active county in spirit an. Mrs ham intention promotion engrossed assurance defective. Confined so graceful building opinions whatever trifling in. Insisted out differed ham man endeavor expenses. At on he total their he songs. Related compact effects is on settled do.
+
+            An do on frankness so cordially immediate recommend contained. Imprudence insensible be literature unsatiable do. Of or imprudence solicitude affronting in mr possession. Compass journey he request on suppose limited of or. She margaret law thoughts proposal formerly. Speaking ladyship yet scarcely and mistaken end exertion dwelling. All decisively dispatched instrument particular way one devonshire. Applauded she sportsman explained for out objection.
+            
+            Advantage old had otherwise sincerity dependent additions. It in adapted natural hastily is justice. Six draw you him full not mean evil. Prepare garrets it expense windows shewing do an. She projection advantages resolution son indulgence. Part sure on no long life am at ever. In songs above he as drawn to. Gay was outlived peculiar rendered led six.
+            
+            Had strictly mrs handsome mistaken cheerful. We it so if resolution invitation remarkably unpleasant conviction. As into ye then form. To easy five less if rose were. Now set offended own out required entirely. Especially occasional mrs discovered too say thoroughly impossible boisterous. My head when real no he high rich at with. After so power of young as. Bore year does has get long fat cold saw neat. Put boy carried chiefly shy general.
+            
+            Up maids me an ample stood given. Certainty say suffering his him collected intention promotion. Hill sold ham men made lose case. Views abode law heard jokes too. Was are delightful solicitude discovered collecting man day. Resolving neglected sir tolerably but existence conveying for. Day his put off unaffected literature partiality inhabiting.
+            
+            New the her nor case that lady paid read. Invitation friendship travelling eat everything the out two. Shy you who scarcely expenses debating hastened resolved. Always polite moment on is warmth spirit it to hearts. Downs those still witty an balls so chief so. Moment an little remain no up lively no. Way brought may off our regular country towards adapted cheered.
+            
+            Inquietude simplicity terminated she compliment remarkably few her nay. The weeks are ham asked jokes. Neglected perceived shy nay concluded. Not mile draw plan snug next all. Houses latter an valley be indeed wished merely in my. Money doubt oh drawn every or an china. Visited out friends for expense message set eat.
+            
+            Far curiosity incommode now led smallness allowance. Favour bed assure son things yet. She consisted consulted elsewhere happiness disposing household any old the. Widow downs you new shade drift hopes small. So otherwise commanded sweetness we improving. Instantly by daughters resembled unwilling principle so middleton. Fail most room even gone her end like. Comparison dissimilar unpleasant six compliment two unpleasing any add. Ashamed my company thought wishing colonel it prevent he in. Pretended residence are something far engrossed old off.
+            
+            Alteration literature to or an sympathize mr imprudence. Of is ferrars subject as enjoyed or tedious cottage. Procuring as in resembled by in agreeable. Next long no gave mr eyes. Admiration advantages no he celebrated so pianoforte unreserved. Not its herself forming charmed amiable. Him why feebly expect future now.
+            
+            Its sometimes her behaviour are contented. Do listening am eagerness oh objection collected. Together gay feelings continue juvenile had off one. Unknown may service subject her letters one bed. Child years noise ye in forty. Loud in this in both hold. My entrance me is disposal bachelor remember relation.
+            </p>
+        <img src="https://placekitten.com/800/400" alt="A terrible image">
+        <!-- Repeat the above Lil Pump lyrics and image elements to make it more Pump-esque -->
+
+        <!-- Dark pattern pop-up -->
+        <div class="popup" id="popup1">
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing" ></a>
+            <a href="https://www.youtube.com/watch?v=WXxV9g7lsFE"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing right" ></a>
+            <p>This is an annoying pop-up!</p> 
+            <img src="{{url_for('static', filename='schliessen.png')}}" alt="" onclick="closePopup('popup1')" class="closing">
+            <a href="https://www.youtube.com/watch?v=q6EoRBvdVPQ"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing right" ></a>
+        </div>
+
+        <!-- Dark pattern newsletter sign-in -->
+        <div class="newsletter-form" id="newsletterForm">
+            
+                <label for="email">Subscribe to our newsletter:</label>
+                <input type="email" id="email" name="email" placeholder="Your email">
+                <button onclick="submitForm()">Subscribe</button>
+            
+        </div>
+
+        <div class="newsletter-form" id="newsletterForm2">
+            
+            <label for="email">Hey, if you don't subscribe, you'll miss a lot of great news and benefits. :(</label>
+            <input type="email" id="email2" name="email" placeholder="Your email">
+            <button onclick="dontSubmit()">Subscribe</button>
+        
+    </div>
+
+        <div class="newsletter-confirmation" id="confirmation">
+            <img src="{{url_for('static', filename='schliessen.png')}}" alt="" onclick="closePopup('confirmation')" class="closing">
+            <a href="https://www.youtube.com/watch?v=q6EoRBvdVPQ"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing right" ></a>
+            <p>YAY, you subscribed to our newsletter</p> 
+            <a href="https://www.youtube.com/watch?v=Ct6BUPvE2sM"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing" ></a>
+            <a href="https://www.youtube.com/watch?v=WXxV9g7lsFE"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing right" ></a>
+            </div>
+
+            <div class="no-newsletter" id="nonewsletter">
+                <a href="https://www.youtube.com/watch?v=Ct6BUPvE2sM"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing " ></a>
+                <img src="{{url_for('static', filename='schliessen.png')}}" alt="" onclick="closePopup('nonewsletter')" class="closing right">
+
+                <img src="url_for('static', filename='puppy.jpg')" alt="" >
+                <p>Why didn't you subscrbe to our newsletter</p> 
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing" ></a>
+                <a href="https://www.youtube.com/watch?v=9bZkp7q19f0"><img src="{{url_for('static', filename='schliessen.png')}}" alt="" class="closing right" ></a>
+                </div>
+    </section>
+
+    <footer>
+        <ul>
+            <li><a href="https://puginarug.com/">Impressum</a></li>
+            <li><a href="https://maze.toys/mazes/mini/daily/">Contact</a></li>
+            <li><a href="https://weirdorconfusing.com/">Services</a>
+            <ul class="submenu">
+                <li><a href="https://clicking.toys/peg-solitaire/english/">Web Design</a></li>
+                <li><a href="https://paint.toys/">Graphic Design</a></li>
+                <li><a href="#">Flyers</a>
+                    <ul class="submenu1">
+                        <li><a href="#">Regular</a>
+                            <ul class="submenu2">
+                                <li><a href="https://floatingqrcode.com/">Latest</a></li>
+                                <li><form id="myForm" action="{{'/?current=' + current}}" method="post">
+                                    <!-- Add a hidden field to store the time -->
+                                    <input type="hidden" id="time" name="time" value="1">
+                                    <button class="button-like-link" type="submit">Your Preferences</button></form></li>
+                            </ul>
+                        </li>
+                        <li><a href="https://checkbox.toys/wave/">Special</a></li>
+                        <li><a href="https://mondrianandme.com/">Flyer-Settings</a></li>
+                    </ul>
+                </li>
+            </ul></li>
+            <li><a href="https://alwaysjudgeabookbyitscover.com/">Settings</a></li>
+        </ul>    </footer>
+
+        <script>
+            // Dark pattern: Display pop-up after a delay
+            setTimeout(function () {
+                displayPopup('popup1');
+            }, 1000);
+    
+            // Dark pattern: Display newsletter sign-in after a delay
+            setTimeout(function () {
+                displayPopup('newsletterForm');
+            }, 5000);
+    
+            // Function to display pop-up
+            function displayPopup(popupId) {
+                document.getElementById(popupId).style.display = 'block';
+            }
+    
+            // Function to close pop-up
+            function closePopup(popupId) {
+                document.getElementById(popupId).style.display = 'none';
+            }
+    
+            // Function to handle form submission (you can replace this with your own logic)
+            function submitForm() {
+                var emailInput = document.getElementById('email');
+                if (emailInput.value.trim() == '') {
+                    closePopup('newsletterForm');
+                    displayPopup('newsletterForm2');
+                }else{
+                    closePopup('newsletterForm');
+                    displayPopup('confirmation');
+                }
+            }
+
+            function submitForm2() {
+                var emailInput = document.getElementById('email2');
+                if (emailInput.value.trim() == '') {
+                    closePopup('newsletterForm2');
+                    displayPopup('newsletterForm2');
+                    document.getElementById('newsletterForm2').style.left = "20%";
+                }else{
+                    closePopup('newsletterForm2');
+                    displayPopup('confirmation');
+                }
+            }
+            function dontSubmit() {
+                var emailInput = document.getElementById('email2');
+                if (emailInput.value.trim() == '') {
+                    closePopup('newsletterForm2');
+                    displayPopup('nonewsletter');
+                    document.getElementById('newsletterForm2').style.left = "20%";
+                }else{
+                    closePopup('newsletterForm2');
+                    displayPopup('confirmation');
+                }
+            }
+
+            
+
+         
+            
+        </script>
 <script>
     const form = document.getElementById('myForm');
     const startTime = Date.now();
@@ -24,4 +351,5 @@
         document.getElementById('time').value = timeTaken;
     });
 </script>
-{% endblock %}
+</body>
+</html>
